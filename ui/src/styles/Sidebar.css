@@ -1,0 +1,12 @@
+.p-menuitem-link {
+  color: black !important; 
+}
+
+.active-menu-item .p-menuitem-link {
+  color: blue !important; 
+}
+
+.p-menuitem-content:hover .p-menuitem-link {
+  background-color: #f2ebeb; 
+  color: black !important; 
+}

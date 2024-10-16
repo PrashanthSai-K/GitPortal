@@ -13,7 +13,7 @@ import "primeicons/primeicons.css";
 export default function CustomFilterDemo() {
   const [customers, setCustomers] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [showFilter, setShowFilter] = useState(false); // Toggle filter visibility
+  const [showFilter, setShowFilter] = useState(false); 
 
   const staticCustomers = [
     {
@@ -124,7 +124,7 @@ export default function CustomFilterDemo() {
     <div className="card p-4">
       {/* Filter icon on the right side */}
       <div className="flex justify-between items-center">
-        <h3>Customers</h3>
+        <h2>Customers</h2>
         <div className="flex items-center">
           <IconField iconPosition="left" className="search-icon-field">
             <InputIcon className="pi pi-search" />
@@ -132,13 +132,12 @@ export default function CustomFilterDemo() {
           </IconField>
           <Button
             icon="pi pi-filter"
-            className="p-button-text p-button-rounded ml-2" // Add margin to the left
+            className="p-button-text p-button-rounded ml-2" 
             onClick={() => setShowFilter(!showFilter)}
           />
         </div>
       </div>
 
-      {/* Conditionally render the filter template when the icon is clicked */}
       {/* {showFilter && (
      
       )} */}
@@ -161,35 +160,35 @@ export default function CustomFilterDemo() {
         <Column
           field="name"
           header="Name"
-          style={{ borderBottom: "1px solid #eeeeee", borderTop:"1px solid #eeeeee"}} // Grey border for column
+          style={{ borderBottom: "1px solid #eeeeee", borderTop:"1px solid #eeeeee"}}
         />
         <Column
           field="representative.name"
           header="Registration Number"
           body={representativeBodyTemplate}
-          style={{ borderBottom: "1px solid #eeeeee" }} // Grey border for column
+          style={{ borderBottom: "1px solid #eeeeee" }} 
         />
         <Column
           field="academicWorkload"
           header="Year"
-          style={{ borderBottom: "1px solid #eeeeee" }} // Grey border for column
+          style={{ borderBottom: "1px solid #eeeeee" }} 
         />
         <Column
           field="academicLab"
           header="email"
-          style={{ borderBottom: "1px solid #eeeeee" }} // Grey border for column
+          style={{ borderBottom: "1px solid #eeeeee" }} 
         />
         <Column
           field="status"
           header="Status"
           body={(rowData) => <Tag value={rowData.status} />}
-          style={{ borderBottom: "1px solid #eeeeee" }} // Grey border for column
+          style={{ borderBottom: "1px solid #eeeeee" }}
         />
         <Column
           field="approval"
           header="Approval Status"
           body={buttonTemplate}
-          style={{ borderBottom: "1px solid #eeeeee" }} // Grey border for column
+          style={{ borderBottom: "1px solid #eeeeee" }} 
         />
       </DataTable>
     </div>
