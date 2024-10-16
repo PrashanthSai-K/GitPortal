@@ -1,8 +1,16 @@
 import './App.css';
-import Login from './Pages/login'
+import { PrimeReactProvider } from 'primereact/api';
+import RoutesComponent from './routes'; 
+import 'primereact/resources/themes/lara-light-indigo/theme.css'; 
+import 'primereact/resources/primereact.min.css'; 
+import 'primeicons/primeicons.css'; 
+
+
 function App() {
   return (
-   <Login/>
+    <PrimeReactProvider>
+      <RoutesComponent /> 
+    </PrimeReactProvider>
   );
 }
 

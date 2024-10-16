@@ -1,30 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { FilterMatchMode } from "primereact/api";
 import { DataTable } from "primereact/datatable";
 import { Button } from "primereact/button";
 import { Column } from "primereact/column";
-import { Dropdown } from "primereact/dropdown";
-import { MultiSelect } from "primereact/multiselect";
-import { Tag } from "primereact/tag";
-import { TriStateCheckbox } from "primereact/tristatecheckbox";
 import { InputNumber } from "primereact/inputnumber";
-import "primereact/resources/primereact.min.css"; // PrimeReact CSS
-import "primeicons/primeicons.css"; // PrimeIcons CSS
+import { Tag } from "primereact/tag";
+import { InputText } from "primereact/inputtext";
+import { IconField } from "primereact/iconfield";
+import { InputIcon } from "primereact/inputicon";
+import "primereact/resources/primereact.min.css";
+import "primeicons/primeicons.css";
 
 export default function CustomFilterDemo() {
   const [customers, setCustomers] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [filters, setFilters] = useState({
-    global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-    name: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    academicWorkload: { value: null, matchMode: FilterMatchMode.CUSTOM },
-    academicLab: { value: null, matchMode: FilterMatchMode.CUSTOM },
-    status: { value: null, matchMode: FilterMatchMode.EQUALS },
-    verified: { value: null, matchMode: FilterMatchMode.EQUALS },
-  });
-  const [globalFilterValue, setGlobalFilterValue] = useState("");
+  const [showFilter, setShowFilter] = useState(false); // Toggle filter visibility
 
-  // Example static data
   const staticCustomers = [
     {
       id: 1,
@@ -44,116 +34,162 @@ export default function CustomFilterDemo() {
       verified: false,
       representative: { name: "Anna Fali" },
     },
+    {
+      id: 3,
+      name: "Jane Smith",
+      academicWorkload: 20,
+      academicLab: 12,
+      status: "new",
+      verified: false,
+      representative: { name: "Anna Fali" },
+    },
+    {
+      id: 4,
+      name: "Jane Smith",
+      academicWorkload: 20,
+      academicLab: 12,
+      status: "new",
+      verified: false,
+      representative: { name: "Anna Fali" },
+    },
+    {
+      id: 5,
+      name: "Jane Smith",
+      academicWorkload: 20,
+      academicLab: 12,
+      status: "new",
+      verified: false,
+      representative: { name: "Anna Fali" },
+    },
+    {
+      id: 6,
+      name: "Jane Smith",
+      academicWorkload: 20,
+      academicLab: 12,
+      status: "new",
+      verified: false,
+      representative: { name: "Anna Fali" },
+    },
+    {
+      id: 7,
+      name: "Jane Smith",
+      academicWorkload: 20,
+      academicLab: 12,
+      status: "new",
+      verified: false,
+      representative: { name: "Anna Fali" },
+    },
   ];
 
-  const statuses = ["unqualified", "qualified", "new", "negotiation", "renewal"];
-
   useEffect(() => {
-    // Simulate data fetching
     setTimeout(() => {
-      setCustomers(staticCustomers); // Set static data
+      setCustomers(staticCustomers);
       setLoading(false);
     }, 500);
   }, []);
 
-  const getSeverity = (status) => {
-    switch (status) {
-      case "unqualified":
-        return "danger";
-      case "qualified":
-        return "success";
-      case "new":
-        return "info";
-      case "negotiation":
-        return "warning";
-      case "renewal":
-        return null;
-      default:
-        return null;
-    }
-  };
-
-  const numericFilterTemplate = (options) => {
+  // Template for numeric filtering
+  const numericFilterTemplate = (value, setValue, placeholder) => {
     return (
-      <div className="flex gap-1">
+      <div className="flex gap-1" style={{ border: "1px solid black" }}>
         <InputNumber
-          value={options.value ? options.value[0] : null}
-          onValueChange={(e) =>
-            options.filterApplyCallback([e.value, options.value ? options.value[1] : null])
-          }
-          placeholder="Min"
+          value={value ? value[0] : null}
+          onValueChange={(e) => setValue([e.value, value ? value[1] : null])}
+          placeholder={`Min ${placeholder}`}
           min={0}
         />
         <InputNumber
-          value={options.value ? options.value[1] : null}
-          onValueChange={(e) =>
-            options.filterApplyCallback([options.value ? options.value[0] : null, e.value])
-          }
-          placeholder="Max"
+          value={value ? value[1] : null}
+          onValueChange={(e) => setValue([value ? value[0] : null, e.value])}
+          placeholder={`Max ${placeholder}`}
           min={0}
         />
       </div>
     );
   };
 
-  const statusItemTemplate = (option) => {
-    return <Tag value={option} severity={getSeverity(option)} />;
-  };
-
   const representativeBodyTemplate = (rowData) => {
     return <span>{rowData.representative.name}</span>;
   };
 
-  const onGlobalFilterChange = (e) => {
-    const value = e.target.value;
-    let _filters = { ...filters };
-    _filters["global"].value = value;
-    setFilters(_filters);
-    setGlobalFilterValue(value);
+  const buttonTemplate = () => {
+    return (
+      <div className="card flex justify-content-center">
+        <Button label="Approve"/>
+      </div>
+    );
   };
 
   return (
-    <div className="card">
+    <div className="card p-4">
+      {/* Filter icon on the right side */}
+      <div className="flex justify-between items-center">
+        <h3>Customers</h3>
+        <div className="flex items-center">
+          <IconField iconPosition="left" className="search-icon-field">
+            <InputIcon className="pi pi-search" />
+            <InputText placeholder="Search" className="search-input" />
+          </IconField>
+          <Button
+            icon="pi pi-filter"
+            className="p-button-text p-button-rounded ml-2" // Add margin to the left
+            onClick={() => setShowFilter(!showFilter)}
+          />
+        </div>
+      </div>
+
+      {/* Conditionally render the filter template when the icon is clicked */}
+      {/* {showFilter && (
+     
+      )} */}
+
       <DataTable
         value={customers}
         paginator
-        rows={10}
+        rows={3}
         dataKey="id"
-        filters={filters}
-        filterDisplay="row"
         loading={loading}
-        globalFilterFields={["name", "academicWorkload", "academicLab", "status"]}
         emptyMessage="No customers found."
-      >
-        <Column field="name" header="Name" />
-        <Column field="representative.name" header="Representative" body={representativeBodyTemplate} />
-        <Column field="academicWorkload" header="Academic Workload" filter filterElement={numericFilterTemplate} />
-        <Column field="academicLab" header="Academic Lab" filter filterElement={numericFilterTemplate} />
+        className="p-datatable-sm"
+        paginatorClassName="custom-paginator"
+        style={{ 
+          border: "1px solid #eeeefd", 
+             
+          borderRadius: "10px 10px 10px 10px", 
+          overflow: "hidden"     
+        }} >
+        <Column
+          field="name"
+          header="Name"
+          style={{ borderBottom: "1px solid #eeeeee", borderTop:"1px solid #eeeeee"}} // Grey border for column
+        />
+        <Column
+          field="representative.name"
+          header="Registration Number"
+          body={representativeBodyTemplate}
+          style={{ borderBottom: "1px solid #eeeeee" }} // Grey border for column
+        />
+        <Column
+          field="academicWorkload"
+          header="Year"
+          style={{ borderBottom: "1px solid #eeeeee" }} // Grey border for column
+        />
+        <Column
+          field="academicLab"
+          header="email"
+          style={{ borderBottom: "1px solid #eeeeee" }} // Grey border for column
+        />
         <Column
           field="status"
           header="Status"
-          filter
-          filterElement={(options) => (
-            <Dropdown
-              value={options.value}
-              options={statuses}
-              onChange={(e) => options.filterApplyCallback(e.value)}
-              itemTemplate={statusItemTemplate}
-              placeholder="Select Status"
-              showClear
-            />
-          )}
+          body={(rowData) => <Tag value={rowData.status} />}
+          style={{ borderBottom: "1px solid #eeeeee" }} // Grey border for column
         />
         <Column
-          field="verified"
-          header="Verified"
-          body={(rowData) => (
-            <i className={`pi ${rowData.verified ? "pi-check-circle" : "pi-times-circle"}`}></i>
-          )}
-          filter
-          filterElement={(options) => (
-            <TriStateCheckbox value={options.value} onChange={(e) => options.filterApplyCallback(e.value)} />
-          )}
+          field="approval"
+          header="Approval Status"
+          body={buttonTemplate}
+          style={{ borderBottom: "1px solid #eeeeee" }} // Grey border for column
         />
       </DataTable>
     </div>
