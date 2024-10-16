@@ -13,7 +13,7 @@ import "primeicons/primeicons.css";
 export default function CustomFilterDemo() {
   const [customers, setCustomers] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [showFilter, setShowFilter] = useState(false); 
+  const [showFilter, setShowFilter] = useState(false);
 
   const staticCustomers = [
     {
@@ -114,16 +114,15 @@ export default function CustomFilterDemo() {
 
   const buttonTemplate = () => {
     return (
-      <div className="card flex justify-content-center">
-        <Button label="Approve"/>
+      <div className="card flex justify-content-center bg-red-700 ">
+        <Button label="Approve" />
       </div>
     );
   };
 
   return (
-    <div className="card p-4">
-      {/* Filter icon on the right side */}
-      <div className="flex justify-between items-center">
+    <div>
+      <div className="flex justify-between items-center mt-12">
         <h2>Customers</h2>
         <div className="flex items-center">
           <IconField iconPosition="left" className="search-icon-field">
@@ -132,7 +131,7 @@ export default function CustomFilterDemo() {
           </IconField>
           <Button
             icon="pi pi-filter"
-            className="p-button-text p-button-rounded ml-2" 
+            className="p-button-text p-button-rounded ml-2"
             onClick={() => setShowFilter(!showFilter)}
           />
         </div>
@@ -151,32 +150,36 @@ export default function CustomFilterDemo() {
         emptyMessage="No customers found."
         className="p-datatable-sm"
         paginatorClassName="custom-paginator"
-        style={{ 
-          border: "1px solid #eeeefd", 
-             
-          borderRadius: "10px 10px 10px 10px", 
-          overflow: "hidden"     
-        }} >
+        style={{
+          border: "1px solid #eeeefd",
+          marginTop: "10px",
+          borderRadius: "10px 10px 10px 10px",
+          overflow: "hidden",
+        }}
+      >
         <Column
           field="name"
           header="Name"
-          style={{ borderBottom: "1px solid #eeeeee", borderTop:"1px solid #eeeeee"}}
+          style={{
+            borderBottom: "1px solid #eeeeee",
+            borderTop: "1px solid #eeeeee",
+          }}
         />
         <Column
           field="representative.name"
           header="Registration Number"
           body={representativeBodyTemplate}
-          style={{ borderBottom: "1px solid #eeeeee" }} 
+          style={{ borderBottom: "1px solid #eeeeee" }}
         />
         <Column
           field="academicWorkload"
           header="Year"
-          style={{ borderBottom: "1px solid #eeeeee" }} 
+          style={{ borderBottom: "1px solid #eeeeee" }}
         />
         <Column
           field="academicLab"
           header="email"
-          style={{ borderBottom: "1px solid #eeeeee" }} 
+          style={{ borderBottom: "1px solid #eeeeee" }}
         />
         <Column
           field="status"
@@ -187,8 +190,21 @@ export default function CustomFilterDemo() {
         <Column
           field="approval"
           header="Approval Status"
-          body={buttonTemplate}
-          style={{ borderBottom: "1px solid #eeeeee" }} 
+          body={(rowData) => (
+            <Tag
+              value={rowData.status}
+              style={{
+                backgroundColor:
+                  rowData.status === "new"
+                    ? "red"
+                    : rowData.status === "qualified"
+                    ? "green"
+                    : "gray",
+                color: "white",
+              }}
+            />
+          )}
+          style={{ borderBottom: "1px solid #eeeeee" }}
         />
       </DataTable>
     </div>

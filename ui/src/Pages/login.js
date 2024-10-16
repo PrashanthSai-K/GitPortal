@@ -18,10 +18,10 @@ function Login() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-100">
-      <GitHubIcon/>
+     
       <h1>Welcome Back</h1>
       <div className="bg-white dark:bg-gray-105 shadow-lg rounded-lg pt-6 pr-7 pl-9 pb-4 w-96 ">
-      <h2 className="text-2xl font-semibold text-center mb-4">GitBit Portal</h2>
+      <h2 className="text-2xl font-semibold text-center mb-4">Academic Dashboard</h2>
         {!token ? (
           <>
             <GoogleLogin />
