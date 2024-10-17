@@ -9,7 +9,7 @@ import { IconField } from "primereact/iconfield";
 import { InputIcon } from "primereact/inputicon";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
-
+import "../styles/table.css";
 export default function CustomFilterDemo() {
   const [customers, setCustomers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -126,7 +126,7 @@ export default function CustomFilterDemo() {
         <h2>Customers</h2>
         <div className="flex items-center">
           <IconField iconPosition="left" className="search-icon-field">
-            <InputIcon className="pi pi-search" />
+            <i className="pi pi-search"></i>
             <InputText placeholder="Search" className="search-input" />
           </IconField>
           <Button
