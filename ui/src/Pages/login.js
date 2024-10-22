@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import GoogleLogin from "../components/loginButton";
-import GitHubIcon from "../components/githubicon";
+import GoogleLogin from "../utilities/loginButton";
+import GitHubIcon from "../utilities/githubicon";
+
 function Login() {
   const [token, setToken] = useState(null);
 
@@ -18,12 +19,13 @@ function Login() {
 
   return (
     
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-100">
+    <div className="flex flex-col items-center justify-center min-h-screen min-w-screen bg-gray-100 dark:bg-gray-100">
      
-      <h1>Welcome Back</h1>
-      <div className="bg-white dark:bg-gray-105 shadow-lg rounded-lg pt-6 pr-7 pl-9 pb-4 w-96 ">
-      <h2 className="text-2xl font-semibold text-center mb-4">Academic Dashboard</h2>
-        {!token ? (
+      {/* <h1>Welcome Back</h1> */}
+      <div className="bg-white dark:bg-gray-105 shadow-lg flex items-center flex-col justify-center rounded-lg h-64 pb-3 px-10 ">
+      <img src="./blue-logo.png" alt=""  className="h-32 w-80" />
+      {/* <h2 className="text-2xl font-semibold text-center mb-4">Academic Dashboard</h2> */}
+        {!token ? ( 
           <>
             <GoogleLogin />
             <div className="mt-4 text-center">

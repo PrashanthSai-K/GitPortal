@@ -2,9 +2,9 @@ import React from "react";
 
 const GoogleLogin = () => {
   return (
-    <button className="flex items-center justify-center ml-10 mb-3 bg-white dark:bg-gray-900 border border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+    <button className="flex items-center justify-center  mb-3 bg-white dark:bg-gray-900 border border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
       <svg
-        className="h-5 w-10 " // Add margin-left using Tailwind's ml-2 class
+        className="h-5 w-10 "
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
         width="800px"

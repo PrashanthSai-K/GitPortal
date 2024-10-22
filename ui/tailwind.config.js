@@ -5,6 +5,9 @@ module.exports = {
     extend: {
         colors: {
             "side-blue" : "#0F3B99"
+        },
+        height : {
+          "88" : "22rem"
         }
     },
   },

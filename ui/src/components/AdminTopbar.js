@@ -1,9 +1,8 @@
 import React from "react";
 import { Toolbar } from "primereact/toolbar";
 import { Avatar } from "primereact/avatar";
-import "../styles/topnav.css";
 
-export default function TopBar() {
+export default function AdminTopBar() {
   const endContent = (
     <>
       <div className="flex align-items-center">

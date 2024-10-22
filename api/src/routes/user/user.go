@@ -10,4 +10,7 @@ func SetUpUserRoutes(router fiber.Router) {
 	user := router.Group("/user")
 
 	user.Get("/", userHandler.GetAllUsers);
+
+	user.Put("/", userHandler.UpdateUser);
+
 }
