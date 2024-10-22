@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-import { Menu } from 'primereact/menu';
-import { Badge } from 'primereact/badge';
+import React, { useEffect, useState } from 'react';
 import { Button } from 'primereact/button';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const AdminSidebar = ({ children }) => {
 
@@ -14,12 +13,33 @@ const AdminSidebar = ({ children }) => {
 
     let items = [
 
-        { label: 'Home', icon: 'pi pi-plus', },
-        { label: 'Table', icon: 'pi pi-table', },
-        { label: 'Upload', icon: 'pi pi-cog', },
+        { label: 'Dashboard', icon: 'pi pi-chart-pie', link: "/admin/dashboard" },
+        { label: 'Project', icon: 'pi pi-table', link: "/admin/project" },
+        { label: 'Leaderboard', icon: 'pi pi-chart-bar', link: "/admin/leaderboard" },
+        { label: "Users", icon: "pi pi-users", link: "/admin/users" },
+        { label: 'Settings', icon: 'pi pi-cog', link: "/admin/settings" },
         { label: 'Logout', icon: 'pi pi-sign-out', }
 
     ];
+
+    const location = useLocation().pathname.split('/');
+    const navigate = useNavigate();
+
+    const setActiveItemFunc = () => {
+        items.map((item) => {
+            if (location.length > 1 && location[2].toLowerCase() === item.label.toLowerCase()) {
+                setActiveItem(item.label);
+            }
+        })
+    }
+
+    useEffect(()=>{
+        setActiveItemFunc();
+    },[])
+
+    const logout =()=>{
+        console.log("logged out");
+    }
 
     return (
         <>
@@ -42,16 +62,24 @@ const AdminSidebar = ({ children }) => {
                     {items.map((item) => {
                         return (
                             <div
-                                className={`text-white mt-3 p-2 ${activeItem === item.label ? ' bg-white-600 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-100 text-white-blue' : ''} hover:bg-gray-50 rounded-lg hover:text-side-blue`} // Apply active class if active
-                                onClick={() => setActiveItem(item.label)}
+                                className={`text-white mt-3 p-2 cursor-pointer ${activeItem === item.label ? '   bg-white-600 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-100 text-white-blue' : ''} hover:bg-gray-50 rounded-lg hover:text-side-blue`} // Apply active class if active
+                                onClick={()=>{
+                                    item.label != "Logout" ? 
+                                        navigate(`${item.link}`)
+                                    :
+                                        logout();
+                                }}  
                             >
-                                <a className=" flex items-center gap-4 text-xl">
+                                <button  className=" flex items-center gap-4 text-xl">
                                     <span className={item.icon} />
                                     <span className="">{item.label}</span>
-                                </a>
+                                </button>
                             </div>
                         )
                     })}
+                </div>
+                <div className='text-gray-50 cursor-pointer opacity-60 absolute bottom-2 left-2  border w-16  text-xs flex items-center justify-center gap-1 py-1 rounded-lg '>
+                    <i className='pi pi-info-circle'></i> <span>help</span>
                 </div>
             </div>
         </>

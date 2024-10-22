@@ -46,7 +46,7 @@ export default function UserTable({ userData, fetchUsers }) {
           icon: 'pi pi-eye',
           command: () => show(rowData),
         },
-        {
+        { 
           label: 'Edit',
           icon: 'pi pi-pencil',
           command: () => edit(rowData),
@@ -122,7 +122,10 @@ export default function UserTable({ userData, fetchUsers }) {
       console.log(error);
       toast.error(error.response.data.error)
     }
+  }
 
+  const yearTemplate = (rowData) => {
+    return <div className="p-1 mr-1">{getYear(rowData).name}</div>;
   }
 
   //Confirm popup related variables and functions
@@ -187,6 +190,7 @@ export default function UserTable({ userData, fetchUsers }) {
           <Column
             field="year"
             header="Year"
+            body= {yearTemplate}
             className="border border-b border-gray-100"
           />
           <Column
@@ -206,7 +210,7 @@ export default function UserTable({ userData, fetchUsers }) {
             className=" w-2 border border-b border-gray-100 "
             body={(rowData) => (
               <div>
-                <Menu model={items(rowData)} popup ref={menuRef} />
+                <Menu className="w-28 text-sm" model={items(rowData)} popup ref={menuRef} />
                 <i onClick={(e) => menuRef.current.toggle(e)}
                   className="pi pi-ellipsis-v"></i>
               </div>
@@ -245,7 +249,7 @@ export default function UserTable({ userData, fetchUsers }) {
       </Dialog>
 
       <Dialog className="pt-5" header="View User" visible={viewVisible} position={"top"} style={{ minWidth: "50vw", }} onHide={() => { if (!viewVisible) return; setViewVisible(false); }} draggable={false} resizable={false}>
-        <form onSubmit={handleSubmit} ref={formRef} id="editUserForm">{console.log(formData)
+        <form onSubmit={handleSubmit} ref={formRef} id="editUserForm">{
         }
           <div className="p-5 flex flex-col gap-5 ">
             <div className=" flex flex-col gap-3">
