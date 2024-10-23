@@ -18,6 +18,7 @@ func main() {
 	app := fiber.New();
 	app.Use(cors.New());
 
+
 	// Connect to the database
 	database.ConnectDatabase()
 
@@ -25,6 +26,6 @@ func main() {
 
 	router.SetUpRouter(app)
 
-	app.Listen(":4500")
+	app.Listen("[::]:4500")
 
 }

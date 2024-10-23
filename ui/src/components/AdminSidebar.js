@@ -14,7 +14,7 @@ const AdminSidebar = ({ children }) => {
     let items = [
 
         { label: 'Dashboard', icon: 'pi pi-chart-pie', link: "/admin/dashboard" },
-        { label: 'Project', icon: 'pi pi-table', link: "/admin/project" },
+        { label: 'Projects', icon: 'pi pi-table', link: "/admin/projects" },
         { label: 'Leaderboard', icon: 'pi pi-chart-bar', link: "/admin/leaderboard" },
         { label: "Users", icon: "pi pi-users", link: "/admin/users" },
         { label: 'Settings', icon: 'pi pi-cog', link: "/admin/settings" },
