@@ -2,7 +2,8 @@ import React from "react";
 import { Toolbar } from "primereact/toolbar";
 import { Avatar } from "primereact/avatar";
 
-export default function AdminTopBar() {
+export default function AdminTopBar({title}) {
+
   const endContent = (
     <>
       <div className="flex align-items-center">
@@ -16,7 +17,7 @@ export default function AdminTopBar() {
   );
 
   const startContent = (
-    <h2 className="text-white font-bold">Dashboard</h2>
+    <h2 className="text-white font-bold text-xl">{title && title}</h2>
   )
 
   return (

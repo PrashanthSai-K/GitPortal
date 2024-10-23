@@ -13,4 +13,5 @@ func SetUpUserRoutes(router fiber.Router) {
 
 	user.Put("/", userHandler.UpdateUser);
 
+	
 }

@@ -23,7 +23,7 @@ export default function UserTable({ userData, fetchUsers }) {
     email: "",
   });
   const menuRef = useRef(null);
-  const [selectedUser, setSelectedUser] = useState(null); // Track selected row for approval
+  const [selectedUser, setSelectedUser] = useState(null); 
 
   useEffect(() => {
     setTimeout(() => {
@@ -32,7 +32,6 @@ export default function UserTable({ userData, fetchUsers }) {
     }, 500);
   }, [userData]);
 
-  // Approve specific user
   const handleApprove = (rowData, event) => {
     confirmPopup({
       target: event.currentTarget,
@@ -44,8 +43,6 @@ export default function UserTable({ userData, fetchUsers }) {
       rejectClassName: "bg-red-500 text-white p-1",
       accept: () => {
         toast.success(`User with ID: ${rowData.id} has been approved`);
-  
-        // Update the status of approved user
         setUsers((prevUsers) =>
           prevUsers.map((user) =>
             user.id === rowData.id ? { ...user, status: "Approved" } : user
@@ -54,8 +51,6 @@ export default function UserTable({ userData, fetchUsers }) {
       },
       reject: () => {
         toast.error(`User with ID: ${rowData.id} has been rejected`);
-  
-        // Update the status of rejected user
         setUsers((prevUsers) =>
           prevUsers.map((user) =>
             user.id === rowData.id ? { ...user, status: "Rejected" } : user
@@ -65,7 +60,6 @@ export default function UserTable({ userData, fetchUsers }) {
     });
   };
 
-  // Menu items for each row
   const items = (rowData) => [
     {
       label: "Options",
@@ -83,7 +77,7 @@ export default function UserTable({ userData, fetchUsers }) {
         {
           label: "Approve",
           icon: "pi pi-check",
-          command: (e) => handleApprove(rowData, e.originalEvent), 
+          command: (e) => handleApprove(rowData, e.originalEvent),
         },
       ],
     },
@@ -102,7 +96,10 @@ export default function UserTable({ userData, fetchUsers }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put("http://localhost:4500/api/v1/user/", formData);
+      const response = await axios.put(
+        "http://localhost:4500/api/v1/user/",
+        formData
+      );
       setVisible(false);
       fetchUsers();
       toast.success(response.data.message);
