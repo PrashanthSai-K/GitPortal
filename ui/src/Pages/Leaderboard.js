@@ -1,6 +1,6 @@
 import React from 'react'
-import AdminSidebar from '../components/AdminSidebar'
-import AdminTopBar from '../components/AdminTopbar'
+import AdminSidebar from '../components/Navbars/AdminSidebar'
+import AdminTopBar from '../components/Navbars/AdminTopbar'
 import { Button } from 'primereact/button'
 
 function Leaderboard() {

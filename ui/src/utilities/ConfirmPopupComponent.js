@@ -2,7 +2,7 @@ import { Button } from 'primereact/button';
 import { ConfirmPopup } from 'primereact/confirmpopup';
 import React, { useRef, useState } from 'react'
 
-function ConfirmPopupComponent({popUpMessage, buttonName, accept}) {
+function ConfirmPopupComponent({popUpMessage, buttonName, accept, color}) {
 
     const buttonRef = useRef(null);
 
@@ -11,7 +11,7 @@ function ConfirmPopupComponent({popUpMessage, buttonName, accept}) {
 
     return (
 
-        <div className=" flex justify-end w-full ">
+        <div className="">
             <ConfirmPopup visible={confirmVisible} onHide={() => setConfirmVisible(false)}
                 accept={accept} reject={() => setConfirmVisible(false)}
                 target={buttonRef.current}
@@ -21,7 +21,7 @@ function ConfirmPopupComponent({popUpMessage, buttonName, accept}) {
             <Button ref={buttonRef}
                 onClick={() => setConfirmVisible(true)} icon="pi pi-check"
                 label={buttonName} type="button"
-                className=" ml-5 rounded-lg px-6 py-1.5 overflow-hidden group bg-side-blue relative hover:bg-gradient-to-r hover:from-blue-500 hover:to-side-blue text-white hover:ring-2 hover:ring-offset-2 hover:ring-side-blue transition-all ease-out duration-300"
+                className={`  rounded-lg px-6 py-1.5 overflow-hidden group bg-${color} relative hover:bg-gradient-to-r hover:from-${color}-500 hover:to-${color} text-white hover:ring-2 hover:ring-offset-2 hover:ring-${color} transition-all ease-out duration-300`}
             />
         </div>
     )

@@ -8,6 +8,9 @@ module.exports = {
         },
         height : {
           "88" : "22rem"
+        },
+        fontSize : {
+          "xsm" : "0.825rem"
         }
     },
   },

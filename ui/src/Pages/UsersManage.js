@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react'
-import TopBar from '../components/AdminTopbar'
-import Sidebar from '../components/AdminSidebar'
-import UserTable from '../components/UserManagement'
+import TopBar from '../components/Navbars/AdminTopbar'
+import Sidebar from '../components/Navbars/AdminSidebar'
+import UserTable from '../components/users/UserManagement'
 import axios from 'axios'
 import  toast from 'react-hot-toast';
-import AdminTopBar from '../components/AdminTopbar'
-import AdminSidebar from '../components/AdminSidebar'
+import AdminTopBar from '../components/Navbars/AdminTopbar'
+import AdminSidebar from '../components/Navbars/AdminSidebar'
 
 
 function UsersManage() {
@@ -18,6 +18,7 @@ function UsersManage() {
         try {
             const response = await axios.get("http://localhost:4500/api/v1/user");
             setUsers(response.data.students);
+
         } catch (error) {
             console.log(error);
             toast.error('Failed to fetch users');

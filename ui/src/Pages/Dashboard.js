@@ -1,8 +1,8 @@
 import React from 'react';
-import UserTable from '../components/UserManagement'
-import AdminSidebar from '../components/AdminSidebar';
-import AdminTopBar from '../components/AdminTopbar';
-import PopupMenu from '../components/Menu';
+import UserTable from '../components/users/UserManagement'
+import AdminSidebar from '../components/Navbars/AdminSidebar';
+import AdminTopBar from '../components/Navbars/AdminTopbar';
+import PopupMenu from '../utilities/Menu';
 
 const Dashboard = () => {
 
